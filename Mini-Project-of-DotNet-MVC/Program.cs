@@ -15,6 +15,17 @@ namespace Mini_Project_of_DotNet_MVC
             builder.Services.AddDbContext<ApplicationContext>(item =>
             item.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            //session
+            builder.Services.AddDistributedMemoryCache();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            //session
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -32,6 +43,7 @@ namespace Mini_Project_of_DotNet_MVC
 
             app.UseAuthorization();
 
+            app.UseSession();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Template}/{action=Index}/{id?}");

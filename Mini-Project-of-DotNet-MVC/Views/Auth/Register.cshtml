@@ -1,0 +1,137 @@
+﻿@model Mini_Project_of_DotNet_MVC.Models.Registration
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" rel="stylesheet" />
+    <title>Register</title>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header text-white" style="background-color:black ;">
+                        <h3 class="text-center">User Registration</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Register" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <!-- Full Name -->
+                            <div class="form-group mb-3">
+                                <label asp-for="FullName" class="form-label">Full Name As per CNIC</label>
+                                <input asp-for="FullName" class="form-control" placeholder="Enter full name as on CNIC" />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+
+                            <!-- CNIC Number -->
+                            <div class="form-group mb-3">
+                                <label asp-for="CNICNumber" class="form-label">Enter CNIC Number</label>
+                                <input asp-for="CNICNumber" class="form-control" placeholder="XXXXX-XXXXXXX-X" />
+                                <span asp-validation-for="CNICNumber" class="text-danger"></span>
+                            </div>
+
+                            <!-- Gender -->
+                            <div class="form-group mb-3">
+                                <label asp-for="Gender" class="form-label">Select Gender</label>
+                                <select asp-for="Gender" class="form-select">
+                                    <option value="">-- Select Gender --</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group mb-3">
+                                <label asp-for="Email" class="form-label">Email Address</label>
+                                <input asp-for="Email" class="form-control" placeholder="example@domain.com" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <!-- Mobile Number -->
+                            <div class="form-group mb-3">
+                                <label asp-for="MobileNumber" class="form-label">Mobile Number</label>
+                                <input asp-for="MobileNumber" class="form-control" placeholder="03XX-XXXXXXX" />
+                                <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                            </div>
+
+                            <!-- Date of Birth -->
+                            <div class="form-group mb-3">
+                                <label asp-for="DateOfBirth" class="form-label">Date of Birth (DD-MM-YYYY)</label>
+                                <input asp-for="DateOfBirth" type="date" class="form-control" placeholder="DD-MM-YYYY" />
+                                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form-group mb-3">
+                                <label asp-for="Password" class="form-label">Password</label>
+                                <input asp-for="Password" type="password" class="form-control" placeholder="Create password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="form-group mb-4">
+                                <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm your password" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-dark">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+
+        <!-- Optional: Format CNIC input -->
+        <script>
+            document.getElementById('CNICNumber').addEventListener('input', function(e) {
+                var value = e.target.value.replace(/\D/g, '');
+                if (value.length > 5) {
+                    value = value.substring(0, 5) + '-' + value.substring(5);
+                }
+                if (value.length > 13) {
+                    value = value.substring(0, 13) + '-' + value.substring(13);
+                }
+                e.target.value = value.substring(0, 15);
+            });
+
+            // Format Date of Birth input
+            document.getElementById('DateOfBirth').addEventListener('input', function(e) {
+                var value = e.target.value.replace(/\D/g, '');
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '-' + value.substring(2);
+                }
+                if (value.length > 5) {
+                    value = value.substring(0, 5) + '-' + value.substring(5);
+                }
+                e.target.value = value.substring(0, 10);
+            });
+        </script>
+    }
+
+</body>
+</html>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
