@@ -29,14 +29,14 @@
                             <!-- Full Name -->
                             <div class="form-group mb-3">
                                 <label asp-for="FullName" class="form-label">Full Name As per CNIC</label>
-                                <input asp-for="FullName" class="form-control" placeholder="Enter full name as on CNIC" />
+                                <input asp-for="FullName" type="text" class="form-control" placeholder="Enter full name as on CNIC" />
                                 <span asp-validation-for="FullName" class="text-danger"></span>
                             </div>
 
                             <!-- CNIC Number -->
                             <div class="form-group mb-3">
                                 <label asp-for="CNICNumber" class="form-label">Enter CNIC Number</label>
-                                <input asp-for="CNICNumber" class="form-control" placeholder="XXXXX-XXXXXXX-X" />
+                                <input asp-for="CNICNumber" type="number" class="form-control" placeholder="XXXXX-XXXXXXX-X" />
                                 <span asp-validation-for="CNICNumber" class="text-danger"></span>
                             </div>
 

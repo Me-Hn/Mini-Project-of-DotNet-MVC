@@ -9,6 +9,28 @@ namespace Mini_Project_of_DotNet_MVC
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            //session work
+            builder.Services.AddDistributedMemoryCache();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            //session work
+
+            //logout work
+            builder.Services.AddAuthentication("Cookies") // "Cookies" is the default scheme name
+            .AddCookie("Cookies", options =>
+              {
+                  options.LoginPath = "/auth/login"; // Set your login path
+                  options.LogoutPath = "/auth/Logout"; // Set your logout path
+                  options.AccessDeniedPath = "/auth/AccessDenied"; // Set your access denied path
+              });
+
+            //logout work
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -41,6 +63,22 @@ namespace Mini_Project_of_DotNet_MVC
 
             app.UseRouting();
 
+            //use session
+
+            app.UseSession();
+
+            //use session
+            //use logout
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers["Cache-Control"] = "no-store, no-cache, must-revalidate"; // HTTP 1.1.
+                context.Response.Headers["Pragma"] = "no-cache"; // For HTTP 1.0.
+                context.Response.Headers["Expires"] = "0"; // Expire immediately
+                await next();
+            });
+
+            //use logout
             app.UseAuthorization();
 
             app.UseSession();

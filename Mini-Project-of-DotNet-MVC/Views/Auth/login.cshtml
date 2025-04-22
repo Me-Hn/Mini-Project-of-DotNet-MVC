@@ -12,7 +12,7 @@
     <title>login</title>
     <style>
         body {
-            background-image: url('../temp/img/login-bg.jpg');
+            background-image: url('../temp/img/car-back.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -175,7 +175,7 @@
     <div class="form-container">
         <p class="title">Welcome back</p>
         <form asp-action="login" class="form">
-            <input asp-for="Email" type="text" class="input" placeholder="Email OR CNIC">
+            <input asp-for="Email" type="text" class="input" placeholder="Email">
             <input asp-for="Password" type="password" class="input" placeholder="Password">
 
             <p class="page-link">
@@ -183,9 +183,11 @@
             </p>
             <button class="form-btn">Log in</button>
         </form>
-        <p class="sign-up-label">
-            Don't have an account?<span class="sign-up-link">Sign up</span>
-        </p>
+        <a href="@Url.Action("Register", "Auth")">
+            <p class="sign-up-label">
+                Don't have an account?<span class="sign-up-link">Sign up</span>
+            </p>
+        </a>
         <div class="buttons-container">
             <div class="apple-login-button">
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" class="apple-icon" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">

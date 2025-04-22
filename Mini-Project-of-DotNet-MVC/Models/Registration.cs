@@ -14,10 +14,10 @@ namespace Mini_Project_of_DotNet_MVC.Models
         public string FullName { get; set; }
 
         [Required(ErrorMessage = "CNIC number is required")]
-        [RegularExpression(@"^\d{5}-\d{7}-\d{1}$", ErrorMessage = "CNIC must be in XXXXX-XXXXXXX-X format")]
-        [MaxLength(13)]
+        [RegularExpression(@"^\d{13}$", ErrorMessage = "CNIC must be exactly 13 digits")]
+        [StringLength(13, ErrorMessage = "CNIC must be 13 digits long")]
         [Display(Name = "CNIC Number")]
-        public string CNICNumber { get; set; }
+        public string? CNICNumber { get; set; }
 
         [Required(ErrorMessage = "Gender is required")]
         [Display(Name = "Gender")]
@@ -30,24 +30,23 @@ namespace Mini_Project_of_DotNet_MVC.Models
 
         [Required(ErrorMessage = "Mobile number is required")]
         [RegularExpression(@"^03\d{2}-\d{7}$", ErrorMessage = "Mobile must be in 03XX-XXXXXXX format")]
-        [MaxLength(11)]
         [Display(Name = "Mobile Number")]
-        public string MobileNumber { get; set; }
+        public string? MobileNumber { get; set; } // Changed from int to string
 
         [Required(ErrorMessage = "Date of birth is required")]
         [Display(Name = "Date of Birth")]
-        [RegularExpression(@"^\d{2}-\d{2}-\d{4}$", ErrorMessage = "Date must be in DD-MM-YYYY format")]
-        public string DateOfBirth { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfBirth { get; set; } // Changed to DateTime type
 
         [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-
+        public string? ConfirmPassword { get; set; }
     }
 }

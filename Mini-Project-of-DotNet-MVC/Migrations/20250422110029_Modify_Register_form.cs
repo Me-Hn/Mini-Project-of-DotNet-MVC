@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Mini_Project_of_DotNet_MVC.Migrations
 {
     /// <inheritdoc />
-    public partial class Registration_work : Migration
+    public partial class Modify_Register_form : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,13 +18,12 @@ namespace Mini_Project_of_DotNet_MVC.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CNICNumber = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    CNICNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MobileNumber = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    DateOfBirth = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    ConfirmPassword = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {

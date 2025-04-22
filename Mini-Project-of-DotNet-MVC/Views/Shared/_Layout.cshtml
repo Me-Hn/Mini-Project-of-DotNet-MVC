@@ -88,7 +88,19 @@
                     </div>
                 <a href="@Url.Action("contact","Template")" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Get Started<i class="fa fa-arrow-right ms-3"></i></a>
+                @* <a href="@Url.Action("auth","login")" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Get Started<i class="fa fa-arrow-right ms-3"></i></a> *@
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a href="@Url.Action("login", "auth")" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
+                    Get Started <i class="fa fa-arrow-right ms-3"></i>
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("profile", "auth")" class="btn btn-success py-4 px-lg-5 d-none d-lg-block">
+                    Go to Dashboard <i class="fa fa-home ms-3"></i>
+                </a>
+            }
             </div>
         </nav>
         <!-- Navbar End -->
@@ -181,5 +193,11 @@
 
     <!-- Template Javascript -->
     <script src="~/temp/js/main.js"></script>
+
+    @* for validations *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    @* for validations *@
 </body>
 </html>
