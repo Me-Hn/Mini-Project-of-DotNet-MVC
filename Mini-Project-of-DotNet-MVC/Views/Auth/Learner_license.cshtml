@@ -1,0 +1,53 @@
+﻿@{
+    Layout = "~/Views/Shared/_Dashboard_view.cshtml"; // Path to your layout file
+}
+
+
+
+        <!-- Your existing dashboard content -->
+        <div class="container">
+            <h2 class="page-title">Learner License Application</h2>
+
+            <div class="info-text">
+                <p class="mb-0">
+                    Learner driving license will be issued and download online by yourself so no physical card will be delivered.
+                    Your face image should be clear and face front without glasses with white background.
+                </p>
+            </div>
+
+            <div class="mb-4">
+                <h5><strong>Dashboard</strong> - Learner License - List</h5>
+            </div>
+            <div class="mb-4">
+        <a href="@Url.Action("Category_vehicle" , "Auth")" class="action-btn">Apply for Learner License</a>
+            </div>
+
+            <div class="table-responsive license-table">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>CNIC</th>
+                            <th>Categories</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Muhammad</td>
+                            <td>Zain</td>
+                            <td>42401-9262358-9</td>
+                            <td>M CAR,</td>
+                            <td><span class="status-badge status-paid">Paid</span></td>
+                            <td><button class="action-btn">Payment Details</button></td>
+                        </tr>
+                        <!-- Additional rows would go here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+   

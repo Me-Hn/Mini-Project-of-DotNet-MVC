@@ -14,7 +14,7 @@ namespace Mini_Project_of_DotNet_MVC
 
             builder.Services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromSeconds(50);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
@@ -24,11 +24,11 @@ namespace Mini_Project_of_DotNet_MVC
             //logout work
             builder.Services.AddAuthentication("Cookies") // "Cookies" is the default scheme name
             .AddCookie("Cookies", options =>
-              {
-                  options.LoginPath = "/auth/login"; // Set your login path
-                  options.LogoutPath = "/auth/Logout"; // Set your logout path
-                  options.AccessDeniedPath = "/auth/AccessDenied"; // Set your access denied path
-              });
+            {
+                options.LoginPath = "/auth/login"; // Set your login path
+                options.LogoutPath = "/auth/Logout"; // Set your logout path
+                options.AccessDeniedPath = "/auth/AccessDenied"; // Set your access denied path
+            });
 
             //logout work
             // Add services to the container.
@@ -38,14 +38,14 @@ namespace Mini_Project_of_DotNet_MVC
             item.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             //session
-            builder.Services.AddDistributedMemoryCache();
+            //builder.Services.AddDistributedMemoryCache();
 
-            builder.Services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
+            //builder.Services.AddSession(options =>
+            //{
+            //    options.IdleTimeout = TimeSpan.FromSeconds(10);
+            //    options.Cookie.HttpOnly = true;
+            //    options.Cookie.IsEssential = true;
+            //});
 
             //session
             var app = builder.Build();

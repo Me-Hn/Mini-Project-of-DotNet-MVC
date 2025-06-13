@@ -1,0 +1,498 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    Layout = null;
+    @model Mini_Project_of_DotNet_MVC.Models.VehicleRegistration
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Registration System</title>
+    <style>
+        :root {
+            --primary-black: #121212;
+            --secondary-black: #1E1E1E;
+            --primary-yellow: #FFD700;
+            --secondary-yellow: #FFC000;
+            --text-light: #F5F5F5;
+            --text-gray: #AAAAAA;
+            --form-width: 700px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-light);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+            .logo img {
+                height: 60px;
+                margin-bottom: 10px;
+            }
+
+            .logo h1 {
+                color: var(--primary-yellow);
+                font-size: 2rem;
+            }
+
+        .vehicle-slider {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .slider-container {
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .vehicle-slide {
+            min-width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+
+            .vehicle-slide img {
+                width: 100%;
+                max-height: 300px;
+                object-fit: contain;
+                border-radius: 5px;
+                margin-bottom: 15px;
+            }
+
+            .vehicle-slide h3 {
+                color: var(--primary-yellow);
+                margin-bottom: 10px;
+                font-size: 1.5rem;
+            }
+
+            .vehicle-slide p {
+                color: var(--text-gray);
+                margin-bottom: 20px;
+                line-height: 1.5;
+            }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #444;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .slider-dot.active {
+                background-color: var(--primary-yellow);
+            }
+
+        .registration-section {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .registration-form {
+            background-color: var(--secondary-black);
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: var(--form-width);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+            .form-progress::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background-color: #333;
+                z-index: 1;
+            }
+
+        .progress-step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+
+            .progress-step.active {
+                background-color: var(--primary-yellow);
+                color: var(--primary-black);
+            }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+            .form-header h2 {
+                color: var(--primary-yellow);
+                margin-bottom: 10px;
+            }
+
+            .form-header p {
+                color: var(--text-gray);
+            }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 500;
+            }
+
+            .form-group input,
+            .form-group select {
+                width: 100%;
+                padding: 12px;
+                background-color: #2a2a2a;
+                border: 1px solid #444;
+                border-radius: 5px;
+                color: var(--text-light);
+                font-size: 1rem;
+            }
+
+                .form-group input:focus,
+                .form-group select:focus {
+                    outline: none;
+                    border-color: var(--primary-yellow);
+                }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background-color: var(--primary-yellow);
+            color: var(--primary-black);
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .btn:hover {
+                background-color: var(--secondary-yellow);
+            }
+
+        .required {
+            color: var(--primary-yellow);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        @* <div class="logo">
+            <img src="https://via.placeholder.com/60x60/FFD700/121212?text=VR" alt="Vehicle Registration">
+            <h1>Vehicle Registration</h1>
+        </div> *@
+
+        <section class="vehicle-slider">
+            <div class="slider-container">
+                <div class="slider-track" id="sliderTrack">
+                    <div class="vehicle-slide">
+                        <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=400&q=80" alt="Private Car">
+                        <h3>Light Transport Vehicle (LTV)</h3>
+                        <p>Register your personal car for everyday use with our quick online process.</p>
+                    </div>
+                    <div class="vehicle-slide">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=400&q=80" alt="Commercial Vehicle">
+                        <h3>Heavy Trnsport Vehicle (HTV)</h3>
+                        <p>Register trucks, vans, and other business vehicles with special permits.</p>
+                    </div>
+                    <div class="vehicle-slide">
+                        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=400&q=80" alt="Motorcycle">
+                        <h3>Motorcycle & Auto (M , Car)</h3>
+                        <p>Complete registration for your motorcycle with all required documentation.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav" id="sliderNav">
+                <div class="slider-dot active"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+            </div>
+        </section>
+
+        <section class="registration-section">
+            <form class="registration-form" id="registrationForm" method="post" enctype="multipart/form-data" asp-action="Category_vehicle">
+                <div class="form-progress">
+                    <div class="progress-step active" id="step1">1</div>
+                    <div class="progress-step" id="step2">2</div>
+                    <div class="progress-step" id="step3">3</div>
+                </div>
+
+                <div class="form-header">
+                    <h2>Vehicle Registration Form</h2>
+                    <p>Please fill in all required fields marked with <span class="required">*</span></p>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FullName">Full Name <span class="required">*</span></label>
+                    <input asp-for="FullName" type="text" required>
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email">Email <span class="required">*</span></label>
+                    <input asp-for="Email" type="email" required>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DateOfBirth">Date of Birth <span class="required">*</span></label>
+                    <input asp-for="DateOfBirth" id="DateOfBirth" type="date" required onchange="validateAge()">
+                    <small id="ageError" style="color: red; display: none;">You must be born before 1999 to register</small>
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber">Phone Number <span class="required">*</span></label>
+                    <input asp-for="PhoneNumber" type="tel" required>
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Address">Address <span class="required">*</span></label>
+                    <input asp-for="Address" type="text" required>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Nationality">Nationality</label>
+                    <select asp-for="Nationality" class="form-control" id="Nationality" name="Nationality">
+                        <option value="">Select Country</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UserPhoto">User Photo <span class="required">*</span></label>
+                    <input asp-for="UserPhoto" type="file" accept="image/*" required>
+                    <span asp-validation-for="UserPhoto" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CnicFront">CNIC Front Photo <span class="required">*</span></label>
+                    <input asp-for="CnicFront" type="file" accept="image/*" required>
+                    <span asp-validation-for="CnicFront" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CnicBack">CNIC Back Photo <span class="required">*</span></label>
+                    <input asp-for="CnicBack" type="file" accept="image/*" required>
+                    <span asp-validation-for="CnicBack" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="VehicleType">Vehicle Type <span class="required">*</span></label>
+                    <select asp-for="VehicleType" required>
+                        <option value="">Select vehicle type</option>
+                        <option value="private LTV">Light Transport Vehicle (LTV)</option>
+                        <option value="commercial HTV">Heavy Transport Vehicle (HTV)</option>
+                        <option value="motorcycle M, Car">Motorcycle & Auto (M, Car)</option>
+                    </select>
+                    <span asp-validation-for="VehicleType" class="text-danger"></span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn">Submit Registration</button>
+                </div>
+            </form>
+
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        //api work
+             $(document).ready(function () {
+            $.ajax({
+                url: "https://restcountries.com/v3.1/all",
+                method: "GET",
+                success: function (data) {
+                    data.sort((a, b) => a.name.common.localeCompare(b.name.common)); // Sort alphabetically
+                    data.forEach(function (country) {
+                        $('#Nationality').append('<option value="' + country.name.common + '">' + country.name.common + '</option>');
+                    });
+                },
+                error: function () {
+                    alert("Error loading country list");
+                }
+            });
+        });
+
+        //api work
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Slider functionality
+            const sliderTrack = document.getElementById('sliderTrack');
+            const sliderDots = document.querySelectorAll('.slider-dot');
+            let currentSlide = 0;
+            const slideCount = document.querySelectorAll('.vehicle-slide').length;
+            let slideInterval;
+
+            function goToSlide(index) {
+                currentSlide = index;
+                sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+                // Update dots
+                sliderDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentSlide);
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slideCount;
+                goToSlide(currentSlide);
+            }
+
+            // Set up dot navigation
+            sliderDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                    resetInterval();
+                });
+            });
+
+            // Auto-advance slides
+            function startInterval() {
+                slideInterval = setInterval(nextSlide, 3000);
+            }
+
+            function resetInterval() {
+                clearInterval(slideInterval);
+                startInterval();
+            }
+
+            startInterval();
+
+            // Form progress tracking
+            const form = document.getElementById('registrationForm');
+            const inputs = form.querySelectorAll('input, select');
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            const step3 = document.getElementById('step3');
+            let filledFields = 0;
+
+            function checkFormProgress() {
+                filledFields = 0;
+                inputs.forEach(input => {
+                    if (input.value.trim() !== '') {
+                        filledFields++;
+                    }
+                });
+
+                const progress = filledFields / inputs.length;
+
+                // Update progress steps
+                if (progress >= 0.25 && progress < 0.75) {
+                    step1.classList.add('active');
+                    step2.classList.add('active');
+                    step3.classList.remove('active');
+                } else if (progress >= 0.75) {
+                    step1.classList.add('active');
+                    step2.classList.add('active');
+                    step3.classList.add('active');
+                } else {
+                    step1.classList.add('active');
+                    step2.classList.remove('active');
+                    step3.classList.remove('active');
+                }
+            }
+
+            // Add event listeners to all form inputs
+            inputs.forEach(input => {
+                input.addEventListener('input', checkFormProgress);
+                input.addEventListener('change', checkFormProgress);
+            });
+
+            // Form submission
+            // form.addEventListener('submit', function(e) {
+            //     e.preventDefault();
+            //     alert('Registration submitted successfully!');
+            //     form.reset();
+            //     checkFormProgress();
+            // });
+        });
+
+                             function validateAge() {
+            const dobInput = document.getElementById('DateOfBirth');
+            const ageError = document.getElementById('ageError');
+
+            if (dobInput.value) {
+                const dob = new Date(dobInput.value);
+                // Create cutoff date as December 31, 1998 at 23:59:59 to ensure anyone born in 1999 is caught
+                const cutoffDate = new Date(1998, 11, 31, 23, 59, 59);
+
+                if (dob > cutoffDate) {
+                    ageError.style.display = 'block';
+                    dobInput.setCustomValidity('You must be born before 1999 to register');
+                } else {
+                    ageError.style.display = 'none';
+                    dobInput.setCustomValidity('');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
